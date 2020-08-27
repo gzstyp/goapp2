@@ -66,7 +66,7 @@ func main() {
 		}
 
 		//创建用户
-		err := db.Create(&newUser).Error
+		err := db.Create(&newUser).Error // 在插入对象 newUser 必须带 & 一同传入,否则会报错 using unaddressable value
 
 		if err != nil {
 			context.JSON(200, gin.H{
