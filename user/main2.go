@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-//使用 gorm 定义model实体|结构体
+//使用 gorm 定义model实体|结构体,没有采用 gorm.Model,生成的表是按下面的字段来创建的,即字段含 id、name、telephone、password
 type User struct {
-	gorm.Model
+	ID        int    `grom:"AUTO_INCREMENT"`
 	Name      string `gorm:"type:varchar(20);not null"`
 	Telephone string `gorm:"type:varchar(11);not null;unique"`
 	Password  string `gorm:"size:40;not null"`
