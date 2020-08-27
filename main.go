@@ -1,10 +1,10 @@
 package main
 
 import (
+	"com.fwtai/app2/common"
+	"com.fwtai/app2/route"
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
-	"goapp2/common"
-	"goapp2/route"
 )
 
 func main() {

@@ -1,8 +1,8 @@
 package route
 
 import (
+	"com.fwtai/app2/controller"
 	"github.com/gin-gonic/gin"
-	"goapp2/controller"
 )
 
 //在main.go调用

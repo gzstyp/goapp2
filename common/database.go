@@ -1,9 +1,9 @@
 package common
 
 import (
+	"com.fwtai/app2/model"
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"goapp2/model"
 )
 
 var DB *gorm.DB

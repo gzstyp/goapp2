@@ -1,4 +1,4 @@
-module goapp2
+module com.fwtai/app2
 
 go 1.14
 

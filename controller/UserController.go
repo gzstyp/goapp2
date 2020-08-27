@@ -1,11 +1,11 @@
 package controller
 
 import (
+	"com.fwtai/app2/common"
+	"com.fwtai/app2/model"
+	"com.fwtai/app2/util"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"goapp2/common"
-	"goapp2/model"
-	"goapp2/util"
 	"log"
 	"net/http"
 )
