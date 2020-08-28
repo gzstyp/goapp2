@@ -1,4 +1,4 @@
-package common
+package jwt
 
 import (
 	"com.fwtai/app2/model"

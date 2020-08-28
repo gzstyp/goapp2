@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"com.fwtai/app2/common"
 	"com.fwtai/app2/common/database"
+	"com.fwtai/app2/common/jwt"
 	"com.fwtai/app2/common/toolClent"
 	"com.fwtai/app2/model"
 	"github.com/gin-gonic/gin"
@@ -27,7 +27,7 @@ func AuthMiddleware() gin.HandlerFunc {
 		}
 		//截取token
 		tokenString = tokenString[7:] //从第0到7个开始截取
-		token, claims, err := common.ParseToken(tokenString)
+		token, claims, err := jwt.ParseToken(tokenString)
 		//如果解析失败或token无效,提示重新登录
 		if err != nil || !token.Valid {
 			toolClent.Response205Msg(context, "无效token或token已失效,请重新登录")
