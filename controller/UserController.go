@@ -126,7 +126,7 @@ func Login(context *gin.Context) {
 	common.ResponseJson(context, common.JsonData(200, "登录成功", data))
 }
 
-//获取个人信息
+//获取个人信息(需要权限认证才能访问的)
 func Info(context *gin.Context) {
 	//获取个人信息肯定是通过认证了，即肯定 context.Set("user", user)，所以直接从 context 获取
 	user, _ := context.Get("user") // _ 用不到该值时就用占位符

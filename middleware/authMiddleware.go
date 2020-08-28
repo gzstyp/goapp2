@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-//认证token
+//认证token,即需要权限认证都要添加本方法,调用方式: r.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
 func AuthMiddleware() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		//1.获取authorization header

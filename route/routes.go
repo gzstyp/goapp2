@@ -12,7 +12,7 @@ func CollectRoute(r *gin.Engine) *gin.Engine {
 	r.POST("/api/auth/register", controller.Register)
 	//登录功能
 	r.POST("/api/auth/login", controller.Login)
-	//获取个人信息,使用 middleware.AuthMiddleware() 保护该接口,即需要认证的url接口
+	//获取个人信息,使用 middleware.AuthMiddleware() 保护该接口,即需要认证的url接口[需要权限认证才能访问的]
 	r.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
 	return r
 }
