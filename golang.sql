@@ -28,7 +28,7 @@ CREATE TABLE `users`  (
   `deleted_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `telephone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `telephone`(`telephone`) USING BTREE,
   INDEX `idx_users_deleted_at`(`deleted_at`) USING BTREE
