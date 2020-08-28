@@ -14,7 +14,7 @@ func JsonData(code int, msg string) map[string]interface{} {
 	}
 }
 
-//生成json格式数据,操作失败
+//生成操作失败的json数据格式
 func JsonFail() map[string]interface{} {
 	return map[string]interface{}{
 		"code": configFile.Code199,
@@ -22,7 +22,7 @@ func JsonFail() map[string]interface{} {
 	}
 }
 
-//生成json格式数据,操作失败,可指定提示文字
+//生成操作失败的json数据格式,可指定提示文字
 func JsonFailMsg(msg string) map[string]interface{} {
 	return map[string]interface{}{
 		"code": configFile.Code199,
@@ -30,7 +30,7 @@ func JsonFailMsg(msg string) map[string]interface{} {
 	}
 }
 
-//生成json格式数据,操作成功
+//生成操作成功的json数据格式
 func JsonSucceed() map[string]interface{} {
 	return map[string]interface{}{
 		"code": configFile.Code200,
@@ -38,7 +38,7 @@ func JsonSucceed() map[string]interface{} {
 	}
 }
 
-//生成json格式数据,操作成功,可指定提示文字
+//生成操作成功的json数据格式,可指定提示文字
 func JsonSucceedMsg(msg string) map[string]interface{} {
 	return map[string]interface{}{
 		"code": configFile.Code200,
@@ -46,7 +46,7 @@ func JsonSucceedMsg(msg string) map[string]interface{} {
 	}
 }
 
-//生成json格式数据,系统错误
+//生成系统错误的json数据格式
 func JsonError() map[string]interface{} {
 	return map[string]interface{}{
 		"code": configFile.Code204,
@@ -54,7 +54,7 @@ func JsonError() map[string]interface{} {
 	}
 }
 
-//生成json格式数据,系统错误,可指定提示文字
+//生成系统错误的json数据格式,可指定提示文字
 func JsonErrorMsg(msg string) map[string]interface{} {
 	return map[string]interface{}{
 		"code": configFile.Code204,
@@ -77,22 +77,22 @@ func ResponseExecute(context *gin.Context, bl bool, msg string) {
 	context.JSON(http.StatusOK, json)
 }
 
-//响应客户端,json数据格式
+//响应客户端,数据类型:json数据格式
 func ResponseJson(context *gin.Context, json map[string]interface{}) {
 	context.JSON(http.StatusOK, json)
 }
 
-//响应客户端,不限类型数据格式
-func ResponseObj(context *gin.Context, msg interface{}) {
+//响应客户端,code=200,数据类型:不限类型数据格式
+func ResponseObj(context *gin.Context, data interface{}) {
 	json := map[string]interface{}{
 		"code": configFile.Code200,
-		"msg":  msg,
-		"data": msg,
+		"msg":  configFile.Msg200,
+		"data": data,
 	}
 	context.JSON(http.StatusOK, json)
 }
 
-//响应客户端,不限类型数据格式
+//响应客户端,数据类型:不限类型数据格式
 func ResponseData(context *gin.Context, msg string, data interface{}) {
 	json := map[string]interface{}{
 		"code": configFile.Code200,
