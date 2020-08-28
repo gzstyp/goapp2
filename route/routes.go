@@ -7,6 +7,7 @@ import (
 
 //定义路由列表
 func CollectRoute(e *gin.Engine) *gin.Engine {
+	e.GET("/", controller.Index)
 	//注册功能
 	e.POST("/api/auth/register", controller.Register)
 	//登录功能

@@ -50,7 +50,7 @@ func AuthMiddleware() gin.HandlerFunc {
 
 //无需权限认证或不受保护的接口
 func auth(url string) bool {
-	var arrs = [...]string{"/api/auth/register", "/api/auth/login", "/api/auth/logout"}
+	var arrs = [...]string{"/", "/api/auth/register", "/api/auth/login", "/api/auth/logout"}
 	for i := 0; i < len(arrs); i++ {
 		if arrs[i] == url {
 			return true
