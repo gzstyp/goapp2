@@ -2,6 +2,8 @@ package controller
 
 import (
 	"com.fwtai/app2/common"
+	"com.fwtai/app2/common/database"
+	"com.fwtai/app2/common/toolClent"
 	"com.fwtai/app2/dto"
 	"com.fwtai/app2/model"
 	"com.fwtai/app2/util"
@@ -14,7 +16,7 @@ import (
 
 //注册
 func Register(context *gin.Context) {
-	DB := common.GetDB() //前面的 DB 写成db小写也是可以的,下面要跟着改
+	DB := database.GetDB() //前面的 DB 写成db小写也是可以的,下面要跟着改
 	//1.获取参数
 	name := context.PostForm("name")
 	telephone := context.PostForm("telephone")
@@ -48,7 +50,7 @@ func Register(context *gin.Context) {
 	}
 	hashPassword, er := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if er != nil {
-		common.CreateErrorJson(context, common.CreateJson(204, "加密错误"))
+		toolClent.ResponseJson(context, toolClent.JsonErrorMsg("加密出错"))
 		return
 	}
 
@@ -67,11 +69,8 @@ func Register(context *gin.Context) {
 		})
 		return
 	}
-
 	//5.返回结果
-	context.JSON(200, gin.H{
-		"msg": "注册成功,手机号:" + telephone,
-	})
+	toolClent.ResponseJson(context, toolClent.JsonSucceedMsg("注册成功,手机号:"+telephone))
 }
 
 //登录
@@ -81,40 +80,39 @@ func Login(context *gin.Context) {
 	password := context.PostForm("password")
 	//2.数据验证
 	if len(telephone) != 11 {
-		json := common.CreateJson(199, "请输入正确的手机号")
-		common.ResponseJson(context, json)
+		toolClent.Response199Msg(context, "请输入正确的手机号")
 		return
 	}
 	if len(password) < 6 {
-		common.ResponseJson(context, common.CreateJson(199, "密码长度需要大于6位"))
+		toolClent.Response199Msg(context, "密码长度需要大于6位")
 		return
 	}
 	//3.判断手机号和密码是否存在
-	db := common.GetDB()
+	db := database.GetDB()
 	var user model.User
 	//err := db.Where("telephone = ? and password = ?", telephone,password).First(&user).Error //多参数,好使的!!!
 	err := db.Where("telephone = ?", telephone).First(&user).Error
 	if err != nil {
 		msg := err.Error()
 		if msg == "record not found" {
-			common.ResponseStatusJson(context, common.CreateJson(199, "用户名或密码错误!"), http.StatusBadRequest) // http.StatusBadRequest --> 400
+			toolClent.Response199Msg(context, "用户名或密码错误!")
 			return
 		}
-		common.CreateErrorJson(context, common.CreateJson(204, "系统出现错误,"+err.Error()))
+		toolClent.Response204Msg(context, "系统出现错误,"+err.Error())
 		return
 	}
 	if user.ID == 0 {
-		common.ResponseStatusJson(context, common.CreateJson(199, "用户名或密码错误"), 400) // 400 --> http.StatusBadRequest
+		toolClent.Response199Msg(context, "用户名或密码错误")
 		return
 	}
 	if e := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); e != nil {
-		common.ResponseStatusJson(context, common.CreateJson(199, "用户名或密码错误"), 400) // 400 --> http.StatusBadRequest
+		toolClent.Response199Msg(context, "用户名或密码错误")
 		return
 	}
 	//4.发放token
 	token, eToken := common.CreateToken(user)
 	if eToken != nil {
-		common.ResponseJson(context, common.CreateJson(199, "哦豁,生成token错误!"))
+		toolClent.Response204Msg(context, "哦豁,生成token错误!")
 		log.Printf("生成token错误:%v", eToken)
 		return
 	}
@@ -122,9 +120,8 @@ func Login(context *gin.Context) {
 		"token":    token,
 		"menuData": "[{}]",
 	}
-
 	//5.返回结果
-	common.ResponseJson(context, common.JsonData(200, "登录成功", data))
+	toolClent.ResponseData(context, "登录成功", data)
 }
 
 //获取个人信息(需要权限认证才能访问的)
@@ -132,7 +129,7 @@ func Info(context *gin.Context) {
 	//获取个人信息肯定是通过认证了，即肯定 context.Set("user", user)，所以直接从 context 获取
 	user, _ := context.Get("user")              // _ 用不到该值时就用占位符
 	userDto := dto.ToUserDto(user.(model.User)) // 强制类型转换???
-	common.ResponseJson(context, common.JsonData(200, "操作成功", userDto))
+	toolClent.ResponseData(context, "操作成功", userDto)
 }
 
 //查询手机号是否已存在

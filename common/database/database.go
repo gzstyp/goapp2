@@ -1,4 +1,4 @@
-package common
+package database
 
 import (
 	"com.fwtai/app2/model"

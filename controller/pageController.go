@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"com.fwtai/app2/common"
+	"com.fwtai/app2/common/toolClent"
 	"github.com/gin-gonic/gin"
 )
 
 func Index(context *gin.Context) {
-	common.ResponseJson(context, common.CreateJson(200, "感谢使用go后端服务接口"))
+	toolClent.Response200Msg(context, "感谢使用go后端服务接口")
 }

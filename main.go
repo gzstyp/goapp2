@@ -1,7 +1,7 @@
 package main
 
 import (
-	"com.fwtai/app2/common"
+	"com.fwtai/app2/common/database"
 	"com.fwtai/app2/middleware"
 	"com.fwtai/app2/route"
 	"github.com/gin-gonic/gin"
@@ -10,7 +10,7 @@ import (
 
 func main() {
 	//初始化数据库
-	db := common.InitDB()
+	db := database.InitDB()
 	defer db.Close() // 延时关闭它
 	//指定运行模式,默认是 gin.DebugMode,打包时需要把下面的这个注释取消掉!!!
 	//gin.SetMode(gin.ReleaseMode)
