@@ -124,7 +124,13 @@ func Login(context *gin.Context) {
 
 	//5.返回结果
 	common.ResponseJson(context, common.JsonData(200, "登录成功", data))
-	return
+}
+
+//获取个人信息
+func Info(context *gin.Context) {
+	//获取个人信息肯定是通过认证了，即肯定 context.Set("user", user)，所以直接从 context 获取
+	user, _ := context.Get("user")
+	common.ResponseJson(context, common.JsonData(200, "操作成功", user))
 }
 
 //查询手机号是否已存在
