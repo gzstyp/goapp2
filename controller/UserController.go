@@ -111,8 +111,14 @@ func Login(context *gin.Context) {
 		return
 	}
 	//4.发放token
+	token, eToken := common.CreateToken(user)
+	if eToken != nil {
+		common.ResponseJson(context, common.CreateJson(199, "哦豁,生成token错误!"))
+		log.Printf("生成token错误:%v", eToken)
+		return
+	}
 	data := gin.H{
-		"token":    "ffffffffb41b556effffffffa3a69d5e",
+		"token":    token,
 		"menuData": "[{}]",
 	}
 
