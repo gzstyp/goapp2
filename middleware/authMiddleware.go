@@ -38,7 +38,6 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 		//若用户userId存在,则将user信息写入上下文
-		user.Password = "" //处理密码,不返回密码
 		context.Set("user", user)
 		context.Next() //继续执行后面的逻辑
 	}
