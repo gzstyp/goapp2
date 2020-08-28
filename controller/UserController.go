@@ -2,6 +2,7 @@ package controller
 
 import (
 	"com.fwtai/app2/common"
+	"com.fwtai/app2/dto"
 	"com.fwtai/app2/model"
 	"com.fwtai/app2/util"
 	"github.com/gin-gonic/gin"
@@ -129,8 +130,9 @@ func Login(context *gin.Context) {
 //获取个人信息(需要权限认证才能访问的)
 func Info(context *gin.Context) {
 	//获取个人信息肯定是通过认证了，即肯定 context.Set("user", user)，所以直接从 context 获取
-	user, _ := context.Get("user") // _ 用不到该值时就用占位符
-	common.ResponseJson(context, common.JsonData(200, "操作成功", user))
+	user, _ := context.Get("user")              // _ 用不到该值时就用占位符
+	userDto := dto.ToUserDto(user.(model.User)) // 强制类型转换???
+	common.ResponseJson(context, common.JsonData(200, "操作成功", userDto))
 }
 
 //查询手机号是否已存在
