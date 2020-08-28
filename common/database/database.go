@@ -4,18 +4,19 @@ import (
 	"com.fwtai/app2/model"
 	"fmt"
 	"github.com/jinzhu/gorm"
+	"github.com/spf13/viper"
 )
 
 var DB *gorm.DB
 
 func InitDB() *gorm.DB {
-	driverName := "mysql"
-	host := "192.168.3.66"
-	port := "3306"
-	database := "golang"
-	username := "root"
-	password := "rootFwtai"
-	charset := "utf8"
+	driverName := viper.GetString("datasouce.driverName")
+	host := viper.GetString("datasouce.host")
+	port := viper.GetString("datasouce.port")
+	database := viper.GetString("datasouce.database")
+	username := viper.GetString("datasouce.username")
+	password := viper.GetString("datasouce.password")
+	charset := viper.GetString("datasouce.charset")
 	args := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=true", username, password, host, port, database, charset)
 	db, err := gorm.Open(driverName, args)
 	if err != nil {

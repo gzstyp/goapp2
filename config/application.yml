@@ -1,0 +1,10 @@
+server:
+  port: 80
+datasouce:
+  driverName: mysql
+  host: 192.168.3.66
+  port: 3306
+  database: golang
+  username: root
+  password: rootFwtai
+  charset: utf8mb4
