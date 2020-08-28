@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"com.fwtai/app2/common"
 	"com.fwtai/app2/common/database"
+	"com.fwtai/app2/common/jwt"
 	"com.fwtai/app2/common/toolClent"
 	"com.fwtai/app2/dto"
 	"com.fwtai/app2/model"
@@ -110,7 +110,7 @@ func Login(context *gin.Context) {
 		return
 	}
 	//4.发放token
-	token, eToken := common.CreateToken(user)
+	token, eToken := jwt.CreateToken(user)
 	if eToken != nil {
 		toolClent.Response204Msg(context, "哦豁,生成token错误!")
 		log.Printf("生成token错误:%v", eToken)
