@@ -7,9 +7,14 @@ import (
 	"strings"
 )
 
-//认证token,即需要权限认证都要添加本方法,调用方式: r.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
+//认证token,即需要权限认证都要添加本方法,调用方式: e.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
 func AuthMiddleware() gin.HandlerFunc {
 	return func(context *gin.Context) {
+		url := context.Request.RequestURI
+		if auth(url) {
+			context.Next()
+			return
+		}
 		//1.获取authorization header
 		tokenString := context.GetHeader("Authorization")
 		//2.验证格式 validate token formate
@@ -41,4 +46,15 @@ func AuthMiddleware() gin.HandlerFunc {
 		context.Set("user", user)
 		context.Next() //继续执行后面的逻辑
 	}
+}
+
+//无需权限认证或不受保护的接口
+func auth(url string) bool {
+	var arrs = [...]string{"/api/auth/register", "/api/auth/login", "/api/auth/logout"}
+	for i := 0; i < len(arrs); i++ {
+		if arrs[i] == url {
+			return true
+		}
+	}
+	return false
 }
