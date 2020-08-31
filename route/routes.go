@@ -16,6 +16,11 @@ func CollectRoute(e *gin.Engine) *gin.Engine {
 	e.GET("/api/auth/info", controller.Info)
 	// 如果有少量的url接口需要被保护的,可以使用 middleware.AuthMiddleware() 保护该接口,即需要认证的url接口[需要权限认证才能访问的]
 	//e.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
+	//重定向
 	e.GET("/redire", controller.Redire)
+	//文件上传,单个文件
+	e.POST("/single", controller.UploadSingle)
+	//文件上传,多个文件
+	e.POST("/multi", controller.UploadMulti)
 	return e
 }
