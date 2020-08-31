@@ -25,7 +25,7 @@ func main() {
 	e.Use(cors()) // 开启跨域
 	// 添加权限认证|权限拦截
 	e.Use(middleware.AuthMiddleware())
-	//注册接口
+	//注册controller路由接口
 	e = route.CollectRoute(e)
 	//_ = http.ListenAndServe(":80", e) //此方式没有Debug模式,适用于生产环境
 	port := viper.GetString("server.port")
