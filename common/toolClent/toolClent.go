@@ -84,64 +84,64 @@ func ResponseJson(context *gin.Context, json map[string]interface{}) {
 
 //响应客户端,code=200,数据类型:不限类型数据格式
 func ResponseObj(context *gin.Context, data interface{}) {
-	json := map[string]interface{}{
+	payload := map[string]interface{}{
 		"code": configFile.Code200,
 		"msg":  configFile.Msg200,
 		"data": data,
 	}
-	context.JSON(http.StatusOK, json)
+	context.JSON(http.StatusOK, payload)
 }
 
 //响应客户端,数据类型:不限类型数据格式
 func ResponseData(context *gin.Context, msg string, data interface{}) {
-	json := map[string]interface{}{
+	payload := map[string]interface{}{
 		"code": configFile.Code200,
 		"msg":  msg,
 		"data": data,
 	}
 	if data == nil || data == "" {
-		json = map[string]interface{}{
+		payload = map[string]interface{}{
 			"code": configFile.Code201,
 			"msg":  configFile.Msg201,
 		}
 	}
-	context.JSON(http.StatusOK, json)
+	context.JSON(http.StatusOK, payload)
 }
 
 //响应客户端,操作失败
 func Response199(context *gin.Context) {
-	json := map[string]interface{}{
+	payload := map[string]interface{}{
 		"code": configFile.Code199,
 		"msg":  configFile.Msg199,
 	}
-	context.JSON(http.StatusOK, json)
+	context.JSON(http.StatusOK, payload)
 }
 
 //响应客户端,操作失败,可指定提示文字
 func Response199Msg(context *gin.Context, msg string) {
-	json := map[string]interface{}{
+	payload := map[string]interface{}{
 		"code": configFile.Code199,
 		"msg":  msg,
 	}
-	context.JSON(http.StatusOK, json)
+	context.JSON(http.StatusOK, payload)
 }
 
 //响应客户端,系统出现错误
 func Response204(context *gin.Context) {
-	json := map[string]interface{}{
+	payload := map[string]interface{}{
 		"code": configFile.Code204,
 		"msg":  configFile.Msg204,
 	}
-	context.JSON(http.StatusOK, json)
+	context.JSON(http.StatusOK, payload)
 }
 
 //响应客户端,系统出现错误,可指定提示文字
 func Response204Msg(context *gin.Context, msg string) {
-	json := map[string]interface{}{
+	payload := map[string]interface{}{
 		"code": configFile.Code204,
 		"msg":  msg,
 	}
-	context.JSON(http.StatusOK, json)
+	context.JSON(http.StatusOK, payload)
 }
 
 //响应客户端,操作成功
