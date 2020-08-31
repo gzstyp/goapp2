@@ -7,6 +7,7 @@ import (
 	"path"
 )
 
+// 单文件上传 https://www.bilibili.com/video/BV1gJ411p7xC?p=15
 func UploadSingle(context *gin.Context) {
 	file, err := context.FormFile("file")
 	if err != nil {
@@ -23,6 +24,7 @@ func UploadSingle(context *gin.Context) {
 	toolClent.Response200Msg(context, "上传成功")
 }
 
+//多文件上传
 func UploadMulti(context *gin.Context) {
 	form, err := context.MultipartForm()
 	if err != nil {
