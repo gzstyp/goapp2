@@ -20,7 +20,7 @@ func main() {
 	db := database.InitDB()
 	defer db.Close() // 延时关闭它
 	//指定运行模式,默认是 gin.DebugMode,打包时需要把下面的这个注释取消掉!!!
-	gin.SetMode(gin.DebugMode)
+	gin.SetMode(gin.ReleaseMode)
 	e := gin.Default()
 
 	// 不删除,前后端分离后用不到静态资源
@@ -43,7 +43,11 @@ func main() {
 
 //集中化管理配置
 func initConfig() {
-	wordDir, _ := os.Getwd()
+	wordDir, er := os.Getwd()
+	if er != nil {
+		log.Println("加载配置文件失败," + er.Error())
+		return
+	}
 	viper.SetConfigName("application")       //文件名
 	viper.SetConfigType("yml")               //文件类型
 	viper.AddConfigPath(wordDir + "/config") //目录

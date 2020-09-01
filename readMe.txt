@@ -36,6 +36,9 @@ set GOARCH=amd64
 set GOOS=linux
 go build main.go
 
+推荐
+go build -ldflags "-w -s" main.go
+
 给文件添加执行的权限
 chmod +x main
 
