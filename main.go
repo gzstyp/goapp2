@@ -22,6 +22,11 @@ func main() {
 	//指定运行模式,默认是 gin.DebugMode,打包时需要把下面的这个注释取消掉!!!
 	gin.SetMode(gin.DebugMode)
 	e := gin.Default()
+
+	// 不删除,前后端分离后用不到静态资源
+	//e.StaticFS("/static", http.Dir("./static"))//加载整个静态文件目录,访问示例: http://192.168.3.108/static/win7.jpg
+	e.StaticFile("/favicon.ico", "./resources/favicon.ico") //加载单个静态文件
+
 	e.Use(cors()) // 开启跨域
 	// 添加权限认证|权限拦截
 	e.Use(middleware.AuthMiddleware())
