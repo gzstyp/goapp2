@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-//认证token,即需要权限认证都要添加本方法,调用方式: e.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
+//中间件的使用，在API中可能使用限流|身份验证等;本项目是用于认证token,即需要权限认证都要添加本方法,调用方式: e.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
 func AuthMiddleware() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		url := context.Request.RequestURI
