@@ -20,7 +20,7 @@ func main() {
 	db := database.InitDB()
 	defer db.Close() // 延时关闭它
 	//指定运行模式,默认是 gin.DebugMode,打包时需要把下面的这个注释取消掉!!!
-	gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.DebugMode)
 	e := gin.Default()
 
 	// 不删除,前后端分离后用不到静态资源
