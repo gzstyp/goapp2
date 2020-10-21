@@ -72,7 +72,7 @@ func cors() gin.HandlerFunc {
 		} else {
 			headerStr = "access-control-allow-origin, access-control-allow-headers"
 		}
-		originDomains := []string{"http://192.168.3.108:8080", "http://localhost:8080"}
+		originDomains := []string{"http://192.168.3.108", "http://192.168.3.108:8080", "http://127.0.0.1:8080"} //如果是80的话,如http://192.168.3.108:80则直接写成http://192.168.3.108即可
 		inArraysFlag := false
 		for _, value := range originDomains {
 			if origin == value {
