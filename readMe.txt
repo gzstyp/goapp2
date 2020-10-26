@@ -42,7 +42,7 @@ go build -ldflags "-w -s" main.go
 给文件添加执行的权限
 chmod +x main
 
-创建目录并上传文件配置文件 application.yml
+创建 config 目录并上传文件配置文件 application.yml 到config目录
 mkdir -p config
 
 运行
