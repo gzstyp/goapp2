@@ -26,14 +26,14 @@ func Register(context *gin.Context) {
 	if len(telephone) != 11 {
 		context.JSON(http.StatusUnprocessableEntity, gin.H{
 			"code": 199,
-			"msg":  "手机号必须是11位",
+			"msg":  "手机号必须是11位!",
 		})
 		return
 	}
 	if len(password) < 6 {
 		context.JSON(422, map[string]interface{}{
 			"code": 199,
-			"msg":  "密码必须大于6位",
+			"msg":  "密码必须大于6位!",
 		})
 		return
 	}
